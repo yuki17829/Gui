@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Một lựa chọn</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffb6c1, #ffd1dc);
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  /* ===== TRÁI TIM ===== */
+  .heart {
+    position: absolute;
+    bottom: -30px; /* bắt đầu từ dưới màn hình */
+    color: rgba(255, 105, 180, 0.5);
+    animation: bayLen 10s linear infinite;
+    pointer-events: none;
+  }
+
+  @keyframes bayLen {
+    from {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    to {
+      transform: translateY(-120vh);
+      opacity: 0;
+    }
+  }
+
+  .box {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 20px;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    z-index: 10;
+  }
+
+  h2 {
+    color: #c2185b;
+    margin-bottom: 30px;
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .btn-leave {
+    background: #f8bbd0;
+    color: #880e4f;
+  }
+
+  .btn-leave:hover {
+    background: #f48fb1;
+  }
+
+  .btn-stay {
+    background: #ec407a;
+    color: white;
+  }
+
+  .btn-stay:hover {
+    background: #d81b60;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="box">
+  <h2>Bạn muốn làm gì?</h2>
+
+  <button class="btn-leave" onclick="roiDi()">
+    Muốn dừng lại và không để ý tới
+  </button>
+
+  <button class="btn-stay" onclick="xemTamTu()">
+    Muốn xem những điều tâm tư trong lòng tôi
+  </button>
+</div>
+
+<script>
+function roiDi() {
+  window.location.href = "https://www.google.com";
+}
+
+function xemTamTu() {
+  window.location.href = "tamtu.html";
+}
+
+/* ===== TẠO TRÁI TIM LIÊN TỤC ===== */
+for (let i = 0; i < 20; i++) {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "❤";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = (12 + Math.random() * 22) + "px";
+  heart.style.animationDelay = (-Math.random() * 10) + "s"; // chạy sẵn
+  document.body.appendChild(heart);
+}
+</script>
+
+</body>
+</html>

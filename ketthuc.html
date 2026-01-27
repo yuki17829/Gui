@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Kết</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ffe4ec, #ffd1dc);
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .box {
+    width: 90%;
+    max-width: 420px;
+    background: rgba(255,255,255,0.9);
+    padding: 32px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  }
+
+  h2 {
+    color: #c2185b;
+    font-size: 22px;
+    margin-bottom: 24px;
+    line-height: 1.6;
+  }
+
+  input {
+    width: 100%;
+    padding: 16px;
+    border-radius: 30px;
+    border: 1px solid #ccc;
+    font-size: 24px;
+    outline: none;
+    text-align: center;
+  }
+
+  .btns {
+    margin-top: 22px;
+    display: none;
+  }
+
+  button {
+    width: 100%;
+    padding: 18px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 30px;
+    font-size: 19px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .yes {
+    background: #ec407a;
+    color: white;
+  }
+
+  .no {
+    background: #f8bbd0;
+    color: #880e4f;
+  }
+
+  /* ===== LỜI KẾT ===== */
+  #done {
+    display: none;
+    text-align: center;
+    font-size: 22px;
+    color: #ad1457;
+    line-height: 1.7;
+    animation: fadeIn 0.8s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="box" id="formBox">
+  <h2>
+    Xin hãy cho tôi thời gian bù đắp lại những điều đã lỡ,<br>
+    để bản thân đủ chín chắn hơn khi nghĩ về chúng ta.
+  </h2>
+
+  <input
+    id="name"
+    placeholder="Nhập tên hoặc biệt danh"
+    oninput="hienNut()"
+  >
+
+  <div class="btns" id="btns">
+    <button class="yes" onclick="luu('Đồng ý')">Đồng ý</button>
+    <button class="no" onclick="luu('Không')">Không</button>
+  </div>
+</div>
+
+<div class="box" id="done">
+  Mọi điều cần nói đã nói xong rồi.<br>
+  Cảm ơn bạn vì đã ở đây đến cuối.
+</div>
+
+<script>
+function hienNut() {
+  const ten = document.getElementById("name").value.trim();
+  document.getElementById("btns").style.display =
+    ten ? "block" : "none";
+}
+
+function luu(traloi) {
+  const ten = document.getElementById("name").value.trim();
+  if (!ten) return;
+
+  const data = {
+    ten: ten,
+    traloi: traloi,
+    thoigian: new Date().toLocaleString()
+  };
+
+  let ds = JSON.parse(localStorage.getItem("tamtu")) || [];
+  ds.push(data);
+  localStorage.setItem("tamtu", JSON.stringify(ds));
+
+  // ẨN FORM – HIỆN LỜI KẾT
+  document.getElementById("formBox").style.display = "none";
+  document.getElementById("done").style.display = "block";
+
+  // OUT WEB
+  setTimeout(() => {
+    window.location.href = "about:blank";
+  }, 1800);
+}
+</script>
+
+</body>
+</html>
